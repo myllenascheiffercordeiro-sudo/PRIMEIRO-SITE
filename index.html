@@ -15,11 +15,11 @@
     <main class="feed-container">
         
         <article class="post-card">
-            <img src="https://picsum.photos/400/250" alt="Tecnologia" class="post-img">
+            <img src="https://picsum.photos/400/250" alt="Imagem de exemplo do post" class="post-img">
             
             <div class="post-content">
                 <h2>Explorando o Front-end</h2>
-                <p>Estou aprendendo HTML, CSS e JavaScript para criar páginas dinâmicas, bonitas e responsivas.</p>
+                <p>Estou aprendendo HTML, CSS e JavaScript para criar páginas dinâmicas e responsivas.</p>
                 
                 <div class="like-section">
                     <button class="like-btn">❤️ Curtir</button>
@@ -29,11 +29,11 @@
         </article>
 
         <article class="post-card">
-            <img src="https://picsum.photos/400/251" alt="Código no VS Code" class="post-img">
+            <img src="https://picsum.photos/400/251" alt="Segunda imagem de exemplo" class="post-img">
             
             <div class="post-content">
                 <h2>Dominando o VS Code</h2>
-                <p>Configurar o ambiente corretamente e entender a estrutura de pastas facilita muito o dia a dia.</p>
+                <p>Configurar o ambiente corretamente facilita muito o dia a dia do desenvolvedor.</p>
                 
                 <div class="like-section">
                     <button class="like-btn">❤️ Curtir</button>
@@ -47,130 +47,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-/* --- Reset Global --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background-color: #f0f2f5;
-    color: #333;
-}
-
-/* --- Cabeçalho --- */
-.header-container {
-    background-color: #007acc;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-/* --- Container do Feed (Flexbox e Espaçamentos) --- */
-.feed-container {
-    display: flex;
-    flex-direction: column; /* Alinha os cards em coluna (um embaixo do outro) */
-    align-items: center;    /* Centraliza os cards na horizontal */
-    padding: 40px 20px;     /* Espaçamento interno da página (cima/baixo e lados) */
-    gap: 30px;              /* Espaço vertical de separação entre os posts */
-}
-
-/* --- Card do Post --- */
-.post-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 450px;
-    width: 100%;
-    overflow: hidden; /* Mantém as bordas da imagem arredondadas junto com o card */
-}
-
-/* --- Estilização de Imagens --- */
-.post-img {
-    width: 100%;          /* Faz a imagem ocupar toda a largura disponível do card */
-    height: 220px;        /* Fixa uma altura padrão */
-    object-fit: cover;    /* Corta a imagem sem distorcer caso mude de proporção */
-}
-
-/* --- Espaçamentos do Texto --- */
-.post-content {
-    padding: 20px;        /* Margem interna para o texto não encostar nas bordas */
-}
-
-.post-content h2 {
-    margin-bottom: 10px;  /* Espaço entre o título e o parágrafo */
-    font-size: 1.4rem;
-}
-
-.post-content p {
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 20px;  /* Espaço entre o parágrafo e o botão */
-}
-
-/* --- Alinhamento da Seção de Curtidas (Flexbox) --- */
-.like-section {
-    display: flex;
-    align-items: center;  /* Alinha verticalmente o botão e o contador no centro */
-    gap: 12px;            /* Espaço horizontal entre o botão e o texto */
-}
-
-/* --- Estilo do Botão --- */
-.like-btn {
-    background-color: #e4e6eb;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.2s;
-}
-
-.like-btn:hover {
-    background-color: #d8dadf;
-}
-
-/* Classe dinâmica ativada via JavaScript quando o post for curtido */
-.like-btn.active {
-    background-color: #ff385c;
-    color: white;
-}
-
-.like-count {
-    font-weight: bold;
-}
-// 1. Seleciona TODOS os botões de curtir da página (Eventos em múltiplos elementos)
-const botoesCurtir = document.querySelectorAll('.like-btn');
-
-// 2. Percorre cada botão encontrado usando o método forEach
-botoesCurtir.forEach((botao) => {
-    
-    // Adiciona o evento de clique individual para o botão atual do laço
-    botao.addEventListener('click', () => {
-        
-        // Sobe até o elemento pai '.like-section' mais próximo para isolar este post dos outros
-        const secaoCurtida = botao.closest('.like-section');
-        
-        // Seleciona o contador correspondente apenas dentro deste post específico
-        const contadorTexto = secaoCurtida.querySelector('.like-count');
-        
-        // Converte o texto atual do contador (ex: "0") em um número inteiro
-        let curtidasAtuais = parseInt(contadorTexto.textContent);
-        
-        // 3. Lógica de Curtidas
-        if (botao.classList.contains('active')) {
-            // Se o botão já tem a classe 'active', o usuário está descurtindo
-            botao.classList.remove('active');
-            curtidasAtuais--;
-        } else {
-            // Se não tem a classe 'active', o usuário está curtindo
-            botao.classList.add('active');
-            curtidasAtuais++;
-        }
-        
-        // Renderiza o novo valor atualizado de curtidas na tela
-        contadorTexto.textContent = curtidasAtuais;
-    });
-});
